@@ -12,8 +12,9 @@ const createScene = function() {
     var camera = new BABYLON.UniversalCamera("Camera", new BABYLON.Vector3(-0.8, 1.7, 1.34), scene);
     camera.setTarget(BABYLON.Vector3.Zero());
     camera.attachControl(canvas, true);
-    camera.lowerRadiusLimit= 0.01;
-    camera.upperRadiusLimit = 0.01;
+    camera.lowerRadiusLimit= 0.1;
+    camera.upperRadiusLimit = 0.1;
+
 
     BABYLON.SceneLoader.ImportMesh(
         '',
@@ -26,12 +27,12 @@ const createScene = function() {
             study.position = new BABYLON.Vector3(-3.147, 0, -0.015);
             study.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
             study.scaling = new BABYLON.Vector3(-4, 4, 4);
-
             study.forEach((mesh) => {
                 if (mesh.material) {
                     mesh.material.alpha = 1;
                 }
             });
+
         });
 
     BABYLON.SceneLoader.ImportMesh(
