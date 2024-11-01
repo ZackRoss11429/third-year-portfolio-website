@@ -33,7 +33,6 @@ const createScene = function() {
                 }
             });
         });
-    // chris is a qt
 
     BABYLON.SceneLoader.ImportMesh(
         '',
