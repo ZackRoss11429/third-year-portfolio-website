@@ -75,11 +75,7 @@ const createScene = function() {
             study.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
             study.scaling = new BABYLON.Vector3(-4, 4, 4);
             study.name = "study";
-            study.forEach((mesh) => {
-                if (mesh.material) {
-                    mesh.material.alpha = 1;
-                }
-            });
+
 
         });
 
@@ -117,11 +113,7 @@ const createScene = function() {
             large_desk.position = new BABYLON.Vector3(0, 0, 3);
             large_desk.name = "main_desk";
 
-            large_desk.forEach((mesh) => {
-                if (mesh.material) {
-                    mesh.material.alpha = 1;
-                }
-            });
+
         });
 
     BABYLON.SceneLoader.ImportMesh(
@@ -151,22 +143,13 @@ const createScene = function() {
             desk_lamp.scaling = new BABYLON.Vector3(-0.5625, 0.5625, 0.5625);
             desk_lamp.name = "desk_lamp";
 
-            desk_lamp.forEach((mesh) => {
-                if (mesh.material) {
-                    mesh.material.alpha = 1;
-                }
-            });
-
         });
     const desk_lamp_light = new BABYLON.SpotLight(
         'spotLight',
         new BABYLON.Vector3(-1.163, 1.468, 3.548),
-        new BABYLON.Vector3(68, -112.5, -45),
-        Math.PI,
-        1,
-        scene
-    );
+        new BABYLON.Vector3(68, -112.5, -45), Math.PI, 1, scene);
     desk_lamp_light.intensity = 10;
+
 
     BABYLON.SceneLoader.ImportMesh(
         '',
@@ -285,6 +268,21 @@ const createScene = function() {
             magnifying_glass.rotation = new BABYLON.Vector3(0, Math.PI * (1/9), 0);
             magnifying_glass.scaling = new BABYLON.Vector3(-0.5, 0.5, 0.5);
             magnifying_glass.name = "magnifying_glass";
+
+        });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'old_journal.gltf',
+        scene,
+        function (meshes) {
+
+            const old_journal1 = meshes[0];
+            old_journal1.position = new BABYLON.Vector3(0, 0.975, 3);
+            old_journal1.rotation = new BABYLON.Vector3(0, Math.PI * (1/9), 0);
+            old_journal1.scaling = new BABYLON.Vector3(-0.5, 0.5, 0.5);
+            old_journal1.name = "old_journal1";
 
         });
 
