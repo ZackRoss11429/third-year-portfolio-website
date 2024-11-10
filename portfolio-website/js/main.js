@@ -279,10 +279,24 @@ const createScene = function() {
         function (meshes) {
 
             const old_journal1 = meshes[0];
-            old_journal1.position = new BABYLON.Vector3(0, 0.975, 3);
-            old_journal1.rotation = new BABYLON.Vector3(0, Math.PI * (1/9), 0);
-            old_journal1.scaling = new BABYLON.Vector3(-0.5, 0.5, 0.5);
+            old_journal1.position = new BABYLON.Vector3(-1.18, 0.975, 3);
+            old_journal1.rotation = new BABYLON.Vector3(0, Math.PI * (47/24), 0);
+            old_journal1.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
             old_journal1.name = "old_journal1";
+
+        });
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'old_journal.gltf',
+        scene,
+        function (meshes) {
+
+            const old_journal2 = meshes[0];
+            old_journal2.position = new BABYLON.Vector3(-1.1, 1.07, 3.15);
+            old_journal2.rotation = new BABYLON.Vector3(0, Math.PI * (43/24), 0);
+            old_journal2.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            old_journal2.name = "old_journal2";
 
         });
 
