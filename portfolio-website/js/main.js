@@ -300,6 +300,10 @@ const createScene = function() {
 
         });
 
+    // mayhaps backend can turn the library into an array of books such that when a new map is made, I can pick
+    // another book in that array and use two page layout templates to decorate each book page with taped pictures and
+    // descriptions??? Also editing existing books for ongoing projects
+
 
     // ############################################ ^  DESK ITEMS  ^  ############################################
 
@@ -360,17 +364,59 @@ const createScene = function() {
             double_drawer.scaling = new BABYLON.Vector3(0.8, 0.8, 0.8);
             double_drawer.name = "double_drawer";
 
-            double_drawer.forEach((mesh) => {
-                if (mesh.material) {
-                    mesh.material.alpha = 1;
-                }
-            });
+        });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'ceiling_lights.gltf',
+        scene,
+        function (meshes) {
+
+            const ceiling_light = meshes[0];
+            ceiling_light.position = new BABYLON.Vector3(-1.345, 3, 2);
+            ceiling_light.rotation = new BABYLON.Vector3(Math.PI, 0, 0);
+            ceiling_light.scaling = new BABYLON.Vector3(2, 2, 2);
+            ceiling_light.name = "ceiling_light";
         });
 
 
     // ############################################  ^  FURNITURE   ^  ############################################
 
+    // ############################################   BOOKSHELF ITEMS    ############################################
 
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_6_2.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_6_2 = meshes[0];
+            stack_of_books_6_2.position = new BABYLON.Vector3(-1.66, 0.868, 4.54);
+            stack_of_books_6_2.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_6_2.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_6_2.name = "stack_of_books_6_2";
+
+        });
+
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_7_3.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_7_3 = meshes[0];
+            stack_of_books_7_3.position = new BABYLON.Vector3(-0.87, 0.868, 4.54);
+            stack_of_books_7_3.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_7_3.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_7_3.name = "stack_of_books_7_3";
+
+        });
+
+    // ############################################ ^ BOOKSHELF ITEMS ^ ############################################
 
 
     BABYLON.SceneLoader.ImportMesh(
