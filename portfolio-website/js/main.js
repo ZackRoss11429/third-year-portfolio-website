@@ -15,16 +15,6 @@ const createScene = function() {
     var camera = new BABYLON.UniversalCamera("Camera", new BABYLON.Vector3(-0.8, 1.7, 1.34), scene);
     camera.attachControl(canvas, true);
 
-    scene.onPointerDown = function casRay() {
-        const hit = scene.pick(scene.pointerX, scene.pointerY);
-
-        if(hit.pickedMesh && hit.pickedMesh.name === 'phone') {
-            hit.pickedMesh.renderOutline = true;
-            hit.pickedMesh.outlineColor = new BABYLON.Color3.Red();
-            hit.pickedMesh.outlineWidth = 0.1;
-        }
-
-    }
 
 
 //     canvas.addEventListener("click", () => {
@@ -544,10 +534,16 @@ const createScene = function() {
             phone.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
             phone.scaling = new BABYLON.Vector3(-0.5, 0.5, 0.5);
             phone.name = "phone";
-            phone.renderOutline = true;
-            phone.outlineColor = new BABYLON.Color3.Red();
-            phone.outlineWidth = 0.1;
+
+
+
         });
+
+    var phone_view = new BABYLON.UniversalCamera("phone_view_camera", new BABYLON.Vector3(-1, 1.6, 1.15), scene);
+    phone_view.alpha = -3.155;
+    phone_view.beta = 1.4895;
+    phone_view.radius = 1.4982;
+    phone_view.rotation = new BABYLON.Vector3(Math.PI/6, Math.PI/2, 0);
 
 
     BABYLON.SceneLoader.ImportMesh(
@@ -565,6 +561,20 @@ const createScene = function() {
         });
 
 
+    scene.onPointerDown = function castRay() {
+        const hit = scene.pick(scene.pointerX, scene.pointerY);
+
+        if(hit.pickedMesh && hit.pickedMesh.parent.parent.name == "phone") {
+            console.log(hit.pickedMesh.parent.parent.name);
+            scene.activeCamera = phone_view;
+
+
+            // hit.pickedMesh.parent.parent.renderOutline = true;
+            // hit.pickedMesh.parent.parent.outlineColor = BABYLON.Color3.Red();
+            // hit.pickedMesh.parent.parent.outlineWidth = 0.1;
+        }
+
+    }
 
 
     return scene;
