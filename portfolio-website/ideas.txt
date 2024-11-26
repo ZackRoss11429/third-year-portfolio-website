@@ -1,0 +1,7 @@
+mayhaps backend can turn the library into an array of books such that when a new map is made, I can pick
+another book in that array and use two page layout templates to decorate each book page with taped pictures and
+descriptions??? Also editing existing books for ongoing projects
+
+Furthering this, when books are clicked on, the player's view is moved to the table where the desired book is placed
+and the player can go through it. Other interactables would just fixed the camera to the object more clearly and pop up
+various details.

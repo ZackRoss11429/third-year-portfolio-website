@@ -10,8 +10,23 @@ const createScene = function() {
 
     scene.createDefaultCameraOrLight(true, false, true);
 
+    const sun = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
+
     var camera = new BABYLON.UniversalCamera("Camera", new BABYLON.Vector3(-0.8, 1.7, 1.34), scene);
     camera.attachControl(canvas, true);
+
+    scene.onPointerDown = function casRay() {
+        const hit = scene.pick(scene.pointerX, scene.pointerY);
+
+        if(hit.pickedMesh && hit.pickedMesh.name === 'phone') {
+            hit.pickedMesh.renderOutline = true;
+            hit.pickedMesh.outlineColor = new BABYLON.Color3.Red();
+            hit.pickedMesh.outlineWidth = 0.1;
+        }
+
+    }
+
+
 //     canvas.addEventListener("click", () => {
 //         canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
 //         canvas.requestPointerLock();
@@ -300,9 +315,7 @@ const createScene = function() {
 
         });
 
-    // mayhaps backend can turn the library into an array of books such that when a new map is made, I can pick
-    // another book in that array and use two page layout templates to decorate each book page with taped pictures and
-    // descriptions??? Also editing existing books for ongoing projects
+
 
 
     // ############################################ ^  DESK ITEMS  ^  ############################################
@@ -388,15 +401,15 @@ const createScene = function() {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_6_2.gltf',
+        'stack_of_books_7_2.gltf',
         scene,
         function (meshes) {
 
-            const stack_of_books_6_2 = meshes[0];
-            stack_of_books_6_2.position = new BABYLON.Vector3(-1.66, 0.868, 4.54);
-            stack_of_books_6_2.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
-            stack_of_books_6_2.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
-            stack_of_books_6_2.name = "stack_of_books_6_2";
+            const stack_of_books_7_2 = meshes[0];
+            stack_of_books_7_2.position = new BABYLON.Vector3(-1.66, 0.868, 4.54);
+            stack_of_books_7_2.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_7_2.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_7_2.name = "stack_of_books_7_2";
 
         });
 
@@ -415,6 +428,70 @@ const createScene = function() {
             stack_of_books_7_3.name = "stack_of_books_7_3";
 
         });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_7_4.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_7_4 = meshes[0];
+            stack_of_books_7_4.position = new BABYLON.Vector3(-0.095, 0.868, 4.54);
+            stack_of_books_7_4.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_7_4.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_7_4.name = "stack_of_books_7_4";
+
+        });
+
+
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_7_5.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_7_5 = meshes[0];
+            stack_of_books_7_5.position = new BABYLON.Vector3(-1.66, 1.368, 4.54);
+            stack_of_books_7_5.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_7_5.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_7_5.name = "stack_of_books_7_5";
+
+        });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_8.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_8 = meshes[0];
+            stack_of_books_8.position = new BABYLON.Vector3(-0.87, 1.368, 4.54);
+            stack_of_books_8.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_8.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_8.name = "stack_of_books_8";
+
+        });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'stack_of_books_7_6.gltf',
+        scene,
+        function (meshes) {
+
+            const stack_of_books_7_6 = meshes[0];
+            stack_of_books_7_6.position = new BABYLON.Vector3(-0.095, 1.368, 4.54);
+            stack_of_books_7_6.rotation = new BABYLON.Vector3(Math.PI * 1.5, Math.PI * 1.5, 0);
+            stack_of_books_7_6.scaling = new BABYLON.Vector3(-0.6, 0.6, 0.6);
+            stack_of_books_7_6.name = "stack_of_books_7_6";
+
+        });
+
+
 
     // ############################################ ^ BOOKSHELF ITEMS ^ ############################################
 
@@ -467,6 +544,9 @@ const createScene = function() {
             phone.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
             phone.scaling = new BABYLON.Vector3(-0.5, 0.5, 0.5);
             phone.name = "phone";
+            phone.renderOutline = true;
+            phone.outlineColor = new BABYLON.Color3.Red();
+            phone.outlineWidth = 0.1;
         });
 
 
