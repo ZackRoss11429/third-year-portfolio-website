@@ -1,4 +1,5 @@
 import * as BABYLON from "@babylonjs/core";
+import {import_default_properties, light_sources} from "./materials.js";
 
 export function import_furniture(scene) {
     BABYLON.SceneLoader.ImportMesh(
@@ -58,6 +59,20 @@ export function import_furniture(scene) {
         'ceiling_lights.gltf',
         scene,
         function (meshes) {
+
+            meshes.forEach((mesh) => {
+               if (mesh.name === 'glass') {
+                   console.log("found glass");
+                   mesh.material.isTranslucencyEnabled = true;
+                   mesh.material.translucencyIntensity = 0.95;
+                   mesh.material.emissiveColor = new BABYLON.Color3(240/255, 192/255, 92/255);
+
+
+               }
+            });
+
+            import_default_properties(scene, meshes);
+            light_sources(scene, meshes);
 
             const ceiling_light = meshes[0];
             ceiling_light.position = new BABYLON.Vector3(-1.345, 3, 2);

@@ -1,4 +1,5 @@
 import * as BABYLON from "@babylonjs/core";
+import {import_default_properties, import_materialProperties} from "./materials.js";
 
 export function import_room(scene) {
     BABYLON.SceneLoader.ImportMesh(
@@ -24,16 +25,18 @@ export function import_room(scene) {
         scene,
         function (meshes) {
 
+            import_default_properties(scene, meshes);
+
             const study_window = meshes[0];
             study_window.position = new BABYLON.Vector3(-3.147, 0, -0.015);
             study_window.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
             study_window.scaling = new BABYLON.Vector3(-4, 4, 4);
             study_window.name = "study_window";
+            console.log(meshes);
+
+            // import_materialProperties(scene, meshes);
 
 
-            study_window.alpha = 0.3;
-            study_window.transparencyMode = BABYLON.PBRMaterial.MATERIAL_ALPHABLEND;
-            study_window.reflectivityColor = new BABYLON.Color3(0.2, 0.2, 0.2);
 
 
 

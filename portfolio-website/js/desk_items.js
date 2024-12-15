@@ -1,4 +1,5 @@
 import * as BABYLON from "@babylonjs/core";
+import {import_default_properties} from "./materials.js";
 
 export function import_desk_items(scene) {
     BABYLON.SceneLoader.ImportMesh(
@@ -35,6 +36,7 @@ export function import_desk_items(scene) {
         'antique_desk_lamp.gltf',
         scene,
         function (meshes) {
+            import_default_properties(scene, meshes);
 
             const desk_lamp = meshes[0];
             desk_lamp.position = new BABYLON.Vector3(-0.95, 0.975, 3.75);
@@ -87,6 +89,7 @@ export function import_desk_items(scene) {
         'antique_compass.gltf',
         scene,
         function (meshes) {
+            import_default_properties(scene, meshes);
 
             const compass = meshes[0];
             compass.position = new BABYLON.Vector3(-1.3, 0.975, 3.35);
@@ -137,6 +140,7 @@ export function import_desk_items(scene) {
         'magnifying_glass.gltf',
         scene,
         function (meshes) {
+            import_default_properties(scene, meshes);
 
             const magnifying_glass = meshes[0];
             magnifying_glass.position = new BABYLON.Vector3(0, 0.975, 3);

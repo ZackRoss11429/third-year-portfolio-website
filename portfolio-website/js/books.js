@@ -1,10 +1,15 @@
 import * as BABYLON from "@babylonjs/core";
 
 export function import_books(scene) {
+
+    var book_array = [[], [], [],
+                            [], [], [],
+                            [], [], []]
+
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_2.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -20,7 +25,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_3.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -35,7 +40,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_4.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -52,7 +57,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_5.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -82,7 +87,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_6.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -97,7 +102,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_3.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 
@@ -112,7 +117,7 @@ export function import_books(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
-        'stack_of_books_7_4.gltf',
+        'stack_of_books_8.gltf',
         scene,
         function (meshes) {
 

@@ -1,11 +1,13 @@
 import * as BABYLON from '@babylonjs/core';
 import '@babylonjs/loaders/GLTF';
 import {Inspector} from '@babylonjs/inspector';
+import {ActionManager, ExecuteCodeAction} from "@babylonjs/core";
 
 import {import_furniture} from "./furniture.js";
 import {import_books} from "./books.js";
 import {import_desk_items} from "./desk_items.js";
 import {import_room} from "./room.js";
+import {import_default_properties, import_materialProperties} from "./materials.js";
 
 
 const canvas = document.getElementById('renderCanvas');
@@ -14,26 +16,34 @@ const engine = new BABYLON.Engine(canvas);
 const createScene = function() {
     const scene = new BABYLON.Scene(engine);
 
-    scene.createDefaultCameraOrLight(true, false, true);
+    scene.createDefaultCamera(true, false, true);
 
     const sun = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
 
-    var camera = new BABYLON.UniversalCamera("Camera", new BABYLON.Vector3(-0.8, 1.7, 1.34), scene);
-    camera.attachControl(canvas, true);
-
-
-
+//     var camera = new BABYLON.UniversalCamera("Camera", new BABYLON.Vector3(-0.8, 1.7, 1.34), scene);
+//     camera.attachControl(canvas, true);
+//
+// // Lock the mouse pointer for immersive controls
 //     canvas.addEventListener("click", () => {
 //         canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock;
 //         canvas.requestPointerLock();
 //     });
+//
+// // Sensitivity for mouse look
 //     camera.angularSensibility = 1000;
 //
+// // Movement flags and speed
 //     let moveForward = false;
 //     let moveBackward = false;
 //     let moveLeft = false;
 //     let moveRight = false;
-//     const moveSpeed = 0.25;
+//     const maxMoveSpeed = 0.25; // Maximum movement speed
+//     let currentSpeed = new BABYLON.Vector3(0, 0, 0); // Current velocity
+//     const acceleration = 0.02; // Rate of acceleration
+//     const deceleration = 0.05; // Rate of deceleration
+//
+// // Fixed Y-level for the camera
+//     const FIXED_Y = 1.7;
 //
 // // Keydown and Keyup listeners for WASD
 //     window.addEventListener("keydown", (event) => {
@@ -54,22 +64,70 @@ const createScene = function() {
 //         }
 //     });
 //
-// // Movement in render loop
-//     scene.onBeforeRenderObservable.add(() => {
-//         const forward = camera.getForwardRay().direction.scale(moveSpeed);
-//         const right = BABYLON.Vector3.Cross(forward, BABYLON.Axis.Y).scale(moveSpeed);
-//
-//         if (moveForward) camera.position.addInPlace(forward);
-//         if (moveBackward) camera.position.subtractInPlace(forward);
-//         if (moveLeft) camera.position.subtractInPlace(right);
-//         if (moveRight) camera.position.addInPlace(right);
+// // Mouse move event for smoother rotation control
+//     let isMouseMoving = false;
+//     canvas.addEventListener("mousemove", () => {
+//         isMouseMoving = true;
+//         clearTimeout(mouseStopTimeout); // Reset mouse stop timeout
+//         mouseStopTimeout = setTimeout(() => (isMouseMoving = false), 100); // Detect when the mouse stops moving
 //     });
+//
+//     let mouseStopTimeout;
+//
+// // Movement logic in the render loop
+//     scene.onBeforeRenderObservable.add(() => {
+//         // Get the forward and right vectors relative to the camera
+//         const forward = new BABYLON.Vector3(
+//             Math.sin(camera.rotation.y),
+//             0,
+//             Math.cos(camera.rotation.y)
+//         );
+//         const right = new BABYLON.Vector3(forward.z, 0, -forward.x);
+//
+//         // Calculate target velocity
+//         let targetVelocity = new BABYLON.Vector3(0, 0, 0);
+//         if (moveForward) targetVelocity.addInPlace(forward.scale(maxMoveSpeed));
+//         if (moveBackward) targetVelocity.subtractInPlace(forward.scale(maxMoveSpeed));
+//         if (moveLeft) targetVelocity.subtractInPlace(right.scale(maxMoveSpeed));
+//         if (moveRight) targetVelocity.addInPlace(right.scale(maxMoveSpeed));
+//
+//         // Smooth acceleration and deceleration
+//         currentSpeed = BABYLON.Vector3.Lerp(currentSpeed, targetVelocity, acceleration);
+//
+//         // Apply movement to the camera
+//         camera.position.addInPlace(currentSpeed);
+//         camera.position.y = FIXED_Y;
+//
+//         // Stop camera rotation if mouse isn't moving
+//         if (!isMouseMoving) {
+//             camera.inputs.attached.mouse.detachControl();
+//         } else if (!camera.inputs.attached.mouse._pointerInput) {
+//             camera.inputs.attached.mouse.attachControl(canvas);
+//         }
+//     });
+//
+// // Set the initial target to prevent zooming and panning
+//     camera.setTarget(BABYLON.Vector3.Zero());
+//     camera.lowerRadiusLimit = 0.1;
+//     camera.upperRadiusLimit = 0.1;
 
-
-    // camera.setTarget(BABYLON.Vector3.Zero());
-    // camera.lowerRadiusLimit= 0.1;
-    // camera.upperRadiusLimit = 0.1;
-
+    // constructor(scene: Scene) {
+    //     scene.actionManager = new ActionManager(scene);
+    //     this.inputMap = {};
+    //     scene.actionManager.registerAction(new
+    //     ExecuteCodeAction(ActionManager.OnKeyDownTrigger, (evt)=> {
+    //         this.inputMap[evt.sourceEvent.key] =
+    //             evt.sourceEvent.type == "keydown";
+    //     }));
+    //     scene.actionManager.registerAction(new
+    //     ExecuteCodeAction(ActionManager.OnKeyUpTrigger, (evt) => {
+    //         this.inputMap[evt.sourceEvent.key] =
+    //             evt.sourceEvent.type == "keyup";
+    //     }));
+    //     scene.onBeforeRenderObservable.add(() => {
+    //         this._updateFromKeyboard();
+    //     });
+    // }
 
 
 
@@ -90,6 +148,8 @@ const createScene = function() {
         scene,
         function (meshes) {
 
+
+
             const chessboard = meshes[0];
             chessboard.position = new BABYLON.Vector3(-2.334, 0.997, 1.45);
             chessboard.rotation = new BABYLON.Vector3(0, Math.PI*1.5, 0);
@@ -107,6 +167,8 @@ const createScene = function() {
         scene,
         function (meshes) {
 
+
+
             const satchel = meshes[0];
             satchel.position = new BABYLON.Vector3(-0.25, 0, 3.1);
             satchel.rotation = new BABYLON.Vector3(0, Math.PI / 6, 0);
@@ -120,6 +182,7 @@ const createScene = function() {
         'rotary_phone.gltf',
         scene,
         function (meshes) {
+
 
             const phone = meshes[0];
             phone.position = new BABYLON.Vector3(0.2, 1, 0.85);
@@ -145,8 +208,9 @@ const createScene = function() {
         scene,
         function (meshes) {
 
+
             const movie_poster1 = meshes[0];
-            movie_poster1.position = new BABYLON.Vector3(-2.616, 1, 2.8);
+            movie_poster1.position = new BABYLON.Vector3(-2.616, 1.4, 2.8);
             movie_poster1.rotation = new BABYLON.Vector3(0, Math.PI*1.5, 0);
             movie_poster1.scaling = new BABYLON.Vector3(-1, 1, 1);
             movie_poster1.name = "movie_poster1";
