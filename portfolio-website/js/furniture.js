@@ -1,7 +1,29 @@
 import * as BABYLON from "@babylonjs/core";
 import {import_default_properties, light_sources} from "./materials.js";
 
+export let sound_position = null;
 export function import_furniture(scene) {
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'record_player.gltf',
+        scene,
+        function (meshes) {
+
+            meshes.forEach((mesh) => {
+                if (mesh.name === "speaker") {
+                    sound_position = mesh.getAbsolutePosition();
+                }
+            })
+
+            const record_player = meshes[0];
+            record_player.position = new BABYLON.Vector3(0.5, 1, 0.73);
+            record_player.rotation = new BABYLON.Vector3(0, Math.PI/2, 0);
+            record_player.scaling = new BABYLON.Vector3(-0.9, 0.9,0.9);
+            record_player.name = "record_player";
+
+        });
+
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
@@ -15,11 +37,7 @@ export function import_furniture(scene) {
             large_bookshelf.scaling = new BABYLON.Vector3(1.675, 1.675, 1.675);
             large_bookshelf.name = "large_bookshelf";
 
-            large_bookshelf.forEach((mesh) => {
-                if (mesh.material) {
-                    mesh.material.alpha = 1;
-                }
-            });
+
         });
 
     BABYLON.SceneLoader.ImportMesh(
@@ -68,6 +86,7 @@ export function import_furniture(scene) {
                    mesh.material.emissiveColor = new BABYLON.Color3(240/255, 192/255, 92/255);
 
 
+               } else {
                }
             });
 

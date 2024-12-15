@@ -61,8 +61,8 @@ export function light_sources(scene, meshes) {
 
             lightSources++;
             const light = new BABYLON.PointLight(`light_${lightSources}`, mesh.getAbsolutePosition(), scene);
-            light.intensity = 0.1;
-            light.diffuse = new BABYLON.Color3(253, 178, 66);
+            light.intensity = 3;
+            light.diffuse = new BABYLON.Color3(253/255, 178/255, 66/255);
 
         }
 
