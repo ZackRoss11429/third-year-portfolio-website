@@ -5,3 +5,16 @@ descriptions??? Also editing existing books for ongoing projects
 Furthering this, when books are clicked on, the player's view is moved to the table where the desired book is placed
 and the player can go through it. Other interactables would just fixed the camera to the object more clearly and pop up
 various details.
+
+Adding naming convention to all blockbench models to target specific cubes that should have certain properties
+(metallic/wooden/reflective)
+
+Thanks to Chris and his city slicker ideas, perhaps make an animated record player with the ability to pick songs (damn you)
+
+WAILA-like tooltip when hovering over interactable (backdrop template plus dict of object name and its icon)
+
+Maybe add Minecraft-esque advancements that are easter eggs (find one interactable, find all, pick a song, find easter egg etc)
+
+Update music list by storing in json file (auto run function that reads all files in music folder and adds them to list (or manual whatever)
+This adds scalability for adding spotify playlist in the future
+

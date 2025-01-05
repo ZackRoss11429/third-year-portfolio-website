@@ -3,6 +3,8 @@ import '@babylonjs/loaders/GLTF';
 import {Inspector} from '@babylonjs/inspector';
 import {ActionManager, ExecuteCodeAction} from "@babylonjs/core";
 import {AudioEngine} from "@babylonjs/core";
+import '@babylonjs/gui';
+import '@babylonjs/gui-editor';
 
 import {import_furniture} from "./furniture.js";
 import {import_books} from "./books.js";
@@ -11,6 +13,7 @@ import {import_room} from "./room.js";
 import {import_default_properties, import_materialProperties} from "./materials.js";
 import {record_player} from "./record_player.js";
 import{sound_position} from "./furniture.js";
+import {displayTooltip} from "./tooltips.js";
 
 
 const canvas = document.getElementById('renderCanvas');
@@ -20,8 +23,9 @@ const createScene = function() {
     const scene = new BABYLON.Scene(engine);
 
     scene.createDefaultCamera(true, false, true);
-
-    const sun = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
+    // const light = new BABYLON.HemisphericLight("ambient_cheat_light", new BABYLON.Vector3(-1.345, 3, 2), scene);
+    //
+    // const sun = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
 
     import_room(scene);
 
@@ -90,8 +94,6 @@ const createScene = function() {
 
     scene.onPointerDown = function castRay() {
         const hit = scene.pick(scene.pointerX, scene.pointerY);
-        console.log(hit.pickedMesh.parent.parent.name);
-
         let hitMesh = hit.pickedMesh;
 
         while (hitMesh.parent !== null) {
@@ -104,20 +106,18 @@ const createScene = function() {
             }
 
         }
+    }
 
-
-        // if(hit.pickedMesh && hit.pickedMesh.parent.parent.name === "phone") {
-        //     console.log(hit.pickedMesh.parent.parent.name);
-        //     scene.activeCamera = phone_view;
-        //
-        // }
-        // else if(hit.pickedMesh && hit.pickedMesh.parent.parent.parent.name === "record_player") {
-        //     console.log(hit.pickedMesh.parent.parent.name);
-        //     record_player(scene)
-        // }
-
-
-
+    scene.onPointerMove = function castRay() {
+        const hit = scene.pick(scene.pointerX, scene.pointerY);
+        let hitMesh = hit.pickedMesh;
+        console.log(hitMesh.name);
+        if(hitMesh.name.startsWith('rp_')) {
+            displayTooltip(scene, "record_player_tooltip.png", new BABYLON.Vector3(sound_position.x, sound_position.y + 0.2, sound_position.z));
+            console.log(sound_position);
+            console.log(sound_position[1]);
+            console.log("Hovering over record_player");
+        }
 
     }
 

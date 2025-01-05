@@ -1,21 +1,16 @@
-// import * as BABYLON from "@babylonjs/core";
-//
-// scene.onPointerDown = function castRay(scene, objectName) {
-//     const hit = scene.pick(scene.pointerX, scene.pointerY);
-//
-//     if(hit.pickedMesh && hit.pickedMesh.parent.parent.name === objectName) {
-//         console.log(hit.pickedMesh.parent.parent.name);
-//         // scene.activeCamera = phone_view;
-//         hit.pickedMesh.parent.parent.forEach((mesh) => {
-//             mesh.enableEdgesRendering();
-//             mesh.edgesWidth = 2.5;
-//             mesh.edgesColor = new BABYLON.Color4(1, 1, 1)
-//         })
-//
-//
-//         // hit.pickedMesh.parent.parent.renderOutline = true;
-//         // hit.pickedMesh.parent.parent.outlineColor = BABYLON.Color3.Red();
-//         // hit.pickedMesh.parent.parent.outlineWidth = 0.1;
-//     }
-//
-// }
+import {displayTooltip} from "./tooltips.js";
+import * as BABYLON from "@babylonjs/core";
+import {sound_position} from "./furniture.js";
+
+scene.onPointerOverTrigger = function castRay(scene) {
+    const hit = scene.pick(scene.pointerX, scene.pointerY);
+    let hitMesh = hit.pickedMesh;
+
+    if(hitMesh.name.startsWith('rp_')) {
+        displayTooltip(scene, new BABYLON.Vector3(sound_position.x, sound_position.y + 0.2, sound_position.z), "Record Player");
+        console.log(sound_position);
+        console.log(sound_position[1]);
+        console.log("Hovering over record_player");
+    }
+
+}

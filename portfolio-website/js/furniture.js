@@ -11,7 +11,7 @@ export function import_furniture(scene) {
         function (meshes) {
 
             meshes.forEach((mesh) => {
-                if (mesh.name === "speaker") {
+                if (mesh.name === "rp_speaker") {
                     sound_position = mesh.getAbsolutePosition();
                 }
             })
@@ -83,7 +83,7 @@ export function import_furniture(scene) {
                    console.log("found glass");
                    mesh.material.isTranslucencyEnabled = true;
                    mesh.material.translucencyIntensity = 0.95;
-                   mesh.material.emissiveColor = new BABYLON.Color3(240/255, 192/255, 92/255);
+                   // mesh.material.emissiveColor = new BABYLON.Color3(240/255, 192/255, 92/255);
 
 
                } else {
