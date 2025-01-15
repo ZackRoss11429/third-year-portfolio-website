@@ -12,12 +12,11 @@ export function record_player(scene, position) {
     console.log("record is playing");
 
     const songList = [
-        "/music/all_or_nothing_at_all-harry_james.mp3",
-        "/music/autumn_leaves-frank_sinatra.mp3",
         "/music/blue_moon-billie_holiday.mp3",
         "/music/but_not_for_me-benny_goodman.mp3",
         "/music/do_I_worry-tommy_dorsey.mp3",
         "/music/everybody_loves_somebody-dean_martin.mp3",
+        "/music/autumn_leaves-frank_sinatra.mp3",
         "/music/i_fall_in_love_too_easily-chet_baker.mp3",
         "/music/ill_be_seeing_you-billie_holiday.mp3",
         "/music/in_a_sentimental_mood-benny_goodman.mp3",
@@ -33,6 +32,7 @@ export function record_player(scene, position) {
         "/music/stardust-lester_young.mp3",
         "/music/strangers_in_the_night-frank_sinatra.mp3",
         "/music/summertime-ella_fitzgerald.mp3",
+        "/music/all_or_nothing_at_all-harry_james.mp3",
         "/music/the_nearness_of_you-glenn_miller.mp3",
         "/music/the_world_we_knew-frank_sinatra.mp3",
         "/music/there_will_never_be_another_you-lester_young.mp3",
