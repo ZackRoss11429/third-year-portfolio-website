@@ -11,7 +11,7 @@ export function import_furniture(scene) {
         function (meshes) {
 
             meshes.forEach((mesh) => {
-                if (mesh.name === "rp_speaker") {
+                if (mesh.name === "int_cube_rp_speaker") {
                     sound_position = mesh.getAbsolutePosition();
                 }
             })
@@ -99,4 +99,35 @@ export function import_furniture(scene) {
             ceiling_light.scaling = new BABYLON.Vector3(2, 2, 2);
             ceiling_light.name = "ceiling_light";
         });
+
+    BABYLON.SceneLoader.ImportMesh(
+        '',
+        '/images-objects/',
+        'leather_chair_1.gltf',
+        scene,
+        function (meshes) {
+
+            const leather_chair_1 = meshes[0];
+            leather_chair_1.position = new BABYLON.Vector3(-0.04, 0, 2.56);
+            leather_chair_1.rotation = new BABYLON.Vector3(0, (17/18)*Math.PI, 0);
+            leather_chair_1.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
+            leather_chair_1.name = "leather_chair_1";
+
+            // meshes.forEach((mesh) => {
+            //     const leatherMaterial = new BABYLON.PBRMaterial("leatherMaterial", scene);
+            //     leatherMaterial.albedoColor = BABYLON.Color3.FromHexString("#421c17");
+            //
+            //     leatherMaterial.roughness = 0.4;
+            //     leatherMaterial.metallic = 0.0;
+            //     leatherMaterial.clearCoat.isEnabled = true;
+            //     leatherMaterial.clearCoat.intensity = 0.8;
+            //     leatherMaterial.clearCoat.roughness = 0.3;
+            //     mesh.material = leatherMaterial;
+            //    //  if (mesh.parent.name !== "legs") {
+            //    //
+            //    // }
+            // });
+
+        });
+
 }

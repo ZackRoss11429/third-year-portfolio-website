@@ -3,7 +3,7 @@ import '@babylonjs/loaders/GLTF';
 import {Inspector} from '@babylonjs/inspector';
 import {ActionManager, ExecuteCodeAction} from "@babylonjs/core";
 import {AudioEngine} from "@babylonjs/core";
-import '@babylonjs/gui';
+import * as GUI from '@babylonjs/gui';
 import '@babylonjs/gui-editor';
 
 import {import_furniture} from "./furniture.js";
@@ -13,8 +13,8 @@ import {import_room} from "./room.js";
 import {import_default_properties, import_materialProperties} from "./materials.js";
 import {record_player} from "./record_player.js";
 import{sound_position} from "./furniture.js";
-import {displayTooltip} from "./tooltips.js";
-
+import {createOutline, objectInteraction} from "./interaction.js";
+import {Player} from "./Player.js";
 
 const canvas = document.getElementById('renderCanvas');
 const engine = new BABYLON.Engine(canvas);
@@ -27,6 +27,7 @@ const createScene = function() {
     //
     // const sun = new BABYLON.DirectionalLight("DirectionalLight", new BABYLON.Vector3(0, -1, 0), scene);
 
+
     import_room(scene);
 
     import_desk_items(scene); // imports desk item models from desk_items.js
@@ -34,6 +35,8 @@ const createScene = function() {
     import_furniture(scene); // imports furniture models from furniture.js
 
     import_books(scene); // imports bookshelf models from books.js
+
+    // const player = new Player(scene);
 
 
     BABYLON.SceneLoader.ImportMesh(
@@ -86,40 +89,9 @@ const createScene = function() {
             phone.name = "phone";
         });
 
-    var phone_view = new BABYLON.UniversalCamera("phone_view_camera", new BABYLON.Vector3(-1, 1.6, 1.15), scene);
-    phone_view.alpha = -3.155;
-    phone_view.beta = 1.4895;
-    phone_view.radius = 1.4982;
-    phone_view.rotation = new BABYLON.Vector3(Math.PI/6, Math.PI/2, 0);
 
-    scene.onPointerDown = function castRay() {
-        const hit = scene.pick(scene.pointerX, scene.pointerY);
-        let hitMesh = hit.pickedMesh;
-
-        while (hitMesh.parent !== null) {
-            hitMesh = hitMesh.parent;
-            console.log(hitMesh.name);
-
-            if(hitMesh && hitMesh.name === "record_player") {
-                console.log(hit.pickedMesh.parent.parent.name);
-                record_player(scene, sound_position);
-            }
-
-        }
-    }
-
-    scene.onPointerMove = function castRay() {
-        const hit = scene.pick(scene.pointerX, scene.pointerY);
-        let hitMesh = hit.pickedMesh;
-        console.log(hitMesh.name);
-        if(hitMesh.name.startsWith('rp_')) {
-            displayTooltip(scene, "record_player_tooltip.png", new BABYLON.Vector3(sound_position.x, sound_position.y + 0.2, sound_position.z));
-            console.log(sound_position);
-            console.log(sound_position[1]);
-            console.log("Hovering over record_player");
-        }
-
-    }
+    createOutline(scene);
+    objectInteraction(scene);
 
 
     BABYLON.SceneLoader.ImportMesh(
