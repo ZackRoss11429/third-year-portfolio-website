@@ -15,6 +15,7 @@ import {record_player} from "./record_player.js";
 import{sound_position} from "./furniture.js";
 import {createOutline, objectInteraction} from "./interaction.js";
 import {Player} from "./Player.js";
+import {isBookOpen} from "./book_content.js";
 
 const canvas = document.getElementById('renderCanvas');
 const engine = new BABYLON.Engine(canvas);
@@ -90,10 +91,6 @@ const createScene = function() {
         });
 
 
-    createOutline(scene);
-    objectInteraction(scene);
-
-
     BABYLON.SceneLoader.ImportMesh(
         '',
         '/images-objects/',
@@ -111,6 +108,12 @@ const createScene = function() {
 
 
 
+    createOutline(scene);
+    objectInteraction(scene);
+
+    scene.registerBeforeRender(() => {
+        isBookOpen(scene);
+    });
 
 
     return scene;

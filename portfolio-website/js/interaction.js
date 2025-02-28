@@ -1,6 +1,7 @@
 import * as BABYLON from '@babylonjs/core';
 import {record_player} from "./record_player.js";
 import {sound_position} from "./furniture.js";
+import {closeBook, openBook} from "./book_content.js";
 
 export function createOutline(scene) {
     const outlineLayer = new BABYLON.HighlightLayer("outlineLayer", scene);
@@ -43,8 +44,22 @@ export function objectInteraction(scene) {
 
         }
         else if(hitMesh.name.endsWith("book_stack")) {
-
+            openBook(scene, "Avalore", 7);
         }
 
     }
+
+    scene.onKeyboardObservable.add((kbInfo) => {
+       if (kbInfo.type === BABYLON.KeyboardEventTypes.KEYDOWN) {
+           if (kbInfo.event.key === "Escape") {
+               closeBook();
+           }
+       }
+    });
+
+
+}
+
+export function interactableExit(scene) {
+    scene.onKey
 }
