@@ -1,1 +1,4 @@
-yadda yadda yadda yadda yadda yadda yadda yadda yadda
+[title]Avalore[/title]
+[text]Welcome to the stories of Avalore. Enjoy.[/text]
+[image][/image]
+[order]123[/order]
