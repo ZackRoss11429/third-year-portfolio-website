@@ -111,10 +111,6 @@ const createScene = function() {
     createOutline(scene);
     objectInteraction(scene);
 
-    scene.registerBeforeRender(() => {
-        isBookOpen(scene);
-    });
-
 
     return scene;
 }
