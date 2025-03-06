@@ -1,6 +1,8 @@
 import * as BABYLON from "@babylonjs/core";
 import {import_default_properties, light_sources} from "./materials.js";
 
+
+// This function calls for the importing of all the furniture-related 3D models. They are then named, positioned, scaled and rotated
 export let sound_position = null;
 export function import_furniture(scene) {
     BABYLON.SceneLoader.ImportMesh(
@@ -10,6 +12,8 @@ export function import_furniture(scene) {
         scene,
         function (meshes) {
 
+            // This object is interactable. It looks for a mesh that has the position for the future sound-emittance
+            // function to play sound from
             meshes.forEach((mesh) => {
                 if (mesh.name === "int_cube_rp_speaker") {
                     sound_position = mesh.getAbsolutePosition();
@@ -113,20 +117,6 @@ export function import_furniture(scene) {
             leather_chair_1.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
             leather_chair_1.name = "leather_chair_1";
 
-            // meshes.forEach((mesh) => {
-            //     const leatherMaterial = new BABYLON.PBRMaterial("leatherMaterial", scene);
-            //     leatherMaterial.albedoColor = BABYLON.Color3.FromHexString("#421c17");
-            //
-            //     leatherMaterial.roughness = 0.4;
-            //     leatherMaterial.metallic = 0.0;
-            //     leatherMaterial.clearCoat.isEnabled = true;
-            //     leatherMaterial.clearCoat.intensity = 0.8;
-            //     leatherMaterial.clearCoat.roughness = 0.3;
-            //     mesh.material = leatherMaterial;
-            //    //  if (mesh.parent.name !== "legs") {
-            //    //
-            //    // }
-            // });
 
         });
 

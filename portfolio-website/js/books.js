@@ -1,5 +1,7 @@
 import * as BABYLON from "@babylonjs/core";
 
+
+// This function calls for the importing of all the book-related 3D models. They are then named, positioned, scaled and rotated
 export function import_books(scene) {
 
     BABYLON.SceneLoader.ImportMesh(

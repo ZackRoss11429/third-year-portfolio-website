@@ -1,6 +1,8 @@
 import * as BABYLON from "@babylonjs/core";
 import {import_default_properties} from "./materials.js";
 
+
+// This function calls for the importing of all the desk-related 3D models. They are then named, positioned, scaled and rotated
 export function import_desk_items(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',

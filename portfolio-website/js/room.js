@@ -1,6 +1,8 @@
 import * as BABYLON from "@babylonjs/core";
 import {import_default_properties, import_materialProperties} from "./materials.js";
 
+
+// This function imports the room-related 3D models to set the environment
 export function import_room(scene) {
     BABYLON.SceneLoader.ImportMesh(
         '',

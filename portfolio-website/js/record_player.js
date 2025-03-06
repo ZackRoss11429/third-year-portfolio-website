@@ -2,11 +2,13 @@ import * as BABYLON from "@babylonjs/core";
 
 
 
-
-
 let currentSongIndex = 0;
 let nowPlaying = null;
 let isPlaying = false;
+
+// This function holds an array of song titles, stored in the music folder. When this function is called, it fetches
+// the audio for the current song and plays it at the position its given in its parameters. Every time this function is
+// called, the current song is fetched from the next song in the array
 export function record_player(scene, position) {
 
     console.log("record is playing");
